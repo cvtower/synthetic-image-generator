@@ -258,10 +258,10 @@ int main(void) {
 	Mat m, disp, warp, alter_cap;
 	vector<Point2f> corners;
 	vector<Point2f> annopts;
-	VideoCapture capture; //声明视频读入类
-	capture.open(0); //从摄像头读入视频 0表示从摄像头读入
+	VideoCapture capture; //
+	capture.open(0); //
 	disp = imread("img_1.jpg");
-	if (!capture.isOpened()) //先判断是否打开摄像头
+	if (!capture.isOpened()) //
 	{
 		cout << "can not open";
 		cin.get();
@@ -273,9 +273,9 @@ int main(void) {
 	namedWindow(ori_img);
 	int i = 0;
 	while (i == 0) {
-		Mat cap; //定义一个Mat变量，用于存储每一帧的图像
-		capture >> cap; //读取当前帧
-		if (!cap.empty()) { //判断当前帧是否捕捉成功 **这步很重要
+		Mat cap; //
+		capture >> cap; //
+		if (!cap.empty()) { //
 			imshow(ori_img, cap);
 			//imwrite("cap.jpg", cap);
 			waitKey(15);
@@ -295,10 +295,10 @@ int main(void) {
 
 			//waitKey(15);
 			i++;
-		} //若当前帧捕捉成功，显示
+		} //
 		else
 			cout << "can not ";
-		//waitKey(30); //延时30毫秒
+		//waitKey(30);
 	}
 
 	return 0;
