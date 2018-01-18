@@ -8,4 +8,6 @@ clDNN is licensed is licensed under GPL 3.0.
 
 Software Requirements:
 python version:
-numpycsvcv2
+numpy
+csv
+cv2
