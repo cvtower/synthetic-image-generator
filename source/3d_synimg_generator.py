@@ -107,9 +107,9 @@ def synth_img(fg_image_path, bg_image_path, combine_title, bboxes):
     anglez = random.uniform(0.0, 20)
     fov = 60
 
-    #镜头与图像间的距离，21为半可视角，算z的距离是为了保证在此可视角度下恰好显示整幅图像
+    #view angle
     z=np.sqrt(fg_width**2 + fg_height**2)/2/np.tan(rad(fov/2))
-    #齐次变换矩阵
+    #rotation transform matrix
     rx = np.array([[1,                  0,                          0,                          0],
                    [0,                  np.cos(rad(anglex)),        -np.sin(rad(anglex)),       0],
                    [0,                 -np.sin(rad(anglex)),        np.cos(rad(anglex)),        0,],
@@ -127,7 +127,7 @@ def synth_img(fg_image_path, bg_image_path, combine_title, bboxes):
 
     r = rx.dot(ry).dot(rz)
 
-    #四对点的生成
+    #image center
     pcenter = np.array([fg_height/2, fg_width/2, 0, 0], np.float32)
     
     p1 = np.array([0,0,  0,0], np.float32) - pcenter
@@ -149,7 +149,7 @@ def synth_img(fg_image_path, bg_image_path, combine_title, bboxes):
     
     dst = np.zeros((4,2), np.float32)
 
-    #投影至成像平面
+    #projection
     for i in range(4):
         dst[i,0] = list_dst[i][0]*z/(z-list_dst[i][2]) + pcenter[0]
         dst[i,1] = list_dst[i][1]*z/(z-list_dst[i][2]) + pcenter[1]
@@ -181,7 +181,7 @@ def synth_img(fg_image_path, bg_image_path, combine_title, bboxes):
 
         bbox_dst = np.zeros((4,2), np.float32)
 
-        #投影至成像平面
+        #projection
         for i in range(4):
             bbox_dst[i,0] = int(list_dst[i][0]*z/(z-list_dst[i][2]) + pcenter[0])
             bbox_dst[i,1] = int(list_dst[i][1]*z/(z-list_dst[i][2]) + pcenter[1])
