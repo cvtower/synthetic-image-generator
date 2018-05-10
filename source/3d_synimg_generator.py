@@ -121,7 +121,7 @@ def synth_img(fg_image_path, bg_image_path, combine_title, bboxes):
     else:
         bg_img = cv2.resize(bg_img_ori, dsize=(int(bg_scale * fg_width), int(bg_scale * fg_height)))
     bg_height, bg_width = bg_img.shape[0:2]
-    #about fov, please to cg tutorial
+    #about fov, please refer to cg tutorial
     z=np.sqrt(bg_width**2 + bg_height**2)/2/np.tan(rad(fov/2))
     #rotation angle of x/y/z dim
     rx = np.array([[1,                  0,                          0,                          0],
